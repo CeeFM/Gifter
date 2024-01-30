@@ -9,6 +9,7 @@ namespace Gifter
         {
             var builder = WebApplication.CreateBuilder(args);
             builder.Services.AddTransient<IPostRepository,  PostRepository>();
+            builder.Services.AddTransient<IUserProfileRepository, UserProfileRepository>();
 
             // Add services to the container.
 
