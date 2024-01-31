@@ -8,7 +8,7 @@ namespace Gifter
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-            builder.Services.AddTransient<IPostRepository,  PostRepository>();
+            builder.Services.AddTransient<IPostRepository, PostRepository>();
             builder.Services.AddTransient<IUserProfileRepository, UserProfileRepository>();
 
             // Add services to the container.
@@ -25,6 +25,13 @@ namespace Gifter
             {
                 app.UseSwagger();
                 app.UseSwaggerUI();
+
+                app.UseCors(options =>
+                {
+                    options.AllowAnyOrigin();
+                    options.AllowAnyMethod();
+                    options.AllowAnyHeader();
+                });
             }
 
             app.UseHttpsRedirection();

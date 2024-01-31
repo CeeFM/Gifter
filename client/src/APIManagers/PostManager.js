@@ -1,6 +1,6 @@
 import React from "react";
 
-const baseUrl = '/api/post';
+const baseUrl = 'https://localhost:44355/api/post';
 
 export const getAllPosts = () => {
   return fetch(baseUrl) 
