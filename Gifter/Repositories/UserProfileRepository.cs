@@ -91,10 +91,10 @@ namespace Gifter.Repositories
                             SELECT p.Id AS PostId, p.Title, p.Caption, p.DateCreated AS PostDateCreated,
                                    p.ImageUrl AS PostImageUrl, p.UserProfileId AS PostUserProfileId, 
                                    up.Id AS UserProfileId, up.Name, up.Email, up.DateCreated AS UserProfileDateCreated, 
-                                   up.ImageUrl AS UserProfileImageUrl, c.Id AS CommentId, c.Message, c.UserProfileId AS CommentUserProfileId, c.CommentPostId
+                                   up.ImageUrl AS UserProfileImageUrl, c.Id AS CommentId, c.Message, c.UserProfileId AS CommentUserProfileId, c.PostId AS CommentPostId
                             FROM   UserProfile up
                             LEFT JOIN Post p ON p.UserProfileId = up.Id
-                            LEFT JOIN Comment c ON c.CommentPostId = p.Id
+                            LEFT JOIN Comment c ON c.PostId = p.Id
                             WHERE up.Id = @Id";
 
                     DbUtils.AddParameter(cmd, "@Id", id);

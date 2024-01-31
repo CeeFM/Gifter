@@ -17,8 +17,8 @@ const [formData, setFormData] = useState({
 const handleChange = (e) => {
     const name = e.target.name;
     const value = e.target.value;
-    setFormData({[name]: value});
-    console.log(formData);
+    setFormData(prevState => ({ ...prevState, [name]: value}));
+    
 };
 
 const handleSubmit = (event) => {
