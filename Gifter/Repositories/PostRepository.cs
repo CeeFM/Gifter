@@ -170,8 +170,8 @@ namespace Gifter.Repositories
                                 ImageUrl = DbUtils.GetString(reader, "UserProfileImageUrl"),
                             }
                         };
-                        reader.Close();
                     }
+                    reader.Close();
 
                     return post;
                 }
