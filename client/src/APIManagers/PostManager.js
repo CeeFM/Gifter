@@ -18,7 +18,7 @@ export const addPost = (singlePost) => {
 };
 
 export const searchAllPosts = (q) => {
-  postUrl += `/search?q=${q}`;
+  postUrl = `/api/post/search?q=${q}`;
   return fetch(postUrl)
     .then((res) => res.json())
 };
