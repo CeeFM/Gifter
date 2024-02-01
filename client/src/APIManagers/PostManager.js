@@ -1,6 +1,6 @@
 import React from "react";
 
-const postUrl = 'https://localhost:44355/api/post';
+let postUrl = '/api/post';
 
 export const getAllPosts = () => {
   return fetch(postUrl) 

@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import ReactDOM from 'react-dom/client';
-import { render } from "react-dom";
 import "./App.css";
 import PostList from "./components/PostList";
 import { BrowserRouter } from 'react-router-dom'
@@ -14,13 +12,12 @@ function App() {
     setRefresh(!refresh);
   };
 
- render(
+ return(
   <BrowserRouter>
     <PostForm handleRefresh={handleRefresh} />
     <PostList refresh={refresh} />
-  </BrowserRouter>,
-  document.getElementById('root')
-)
+  </BrowserRouter>
+);
 }
 
 export default App;

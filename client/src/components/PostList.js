@@ -16,9 +16,16 @@ const PostList = ({ refresh }) => {
   };
 
   const handleChange = (e) => {
-    const newValue = e.target.value;
-    setValue(newValue);
-};
+    setValue(e.target.value);
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    if (value === "") {
+      getPosts();
+    }
+    searchPosts(value);
+  }
 
   useEffect(() => {
     getPosts();
@@ -38,9 +45,9 @@ const PostList = ({ refresh }) => {
       onChange={handleChange} />
       <input type="submit" value="Submit" />
       </form> */}
-      <form>
-        <input type="text" placeholder="Why this disappear" onchange={handleChange} />
-        
+      <form onSubmit={handleSubmit}>
+        <input type="text" placeholder="Why this disappear" onChange={handleChange} />
+        <input type="submit" value="Submit" />
       </form>
       <div className="row justify-content-center">
         <div className="cards-column">
