@@ -15,7 +15,7 @@ function App() {
  return(
   <BrowserRouter>
     <PostForm handleRefresh={handleRefresh} />
-    <PostList refresh={refresh} />
+    <PostList refresh={refresh} handleRefresh={handleRefresh} />
   </BrowserRouter>
 );
 }

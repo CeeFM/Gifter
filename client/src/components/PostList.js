@@ -3,7 +3,7 @@ import { getAllPosts } from "../APIManagers/PostManager.js";
 import { Post } from "./Post";
 import { searchAllPosts } from "../APIManagers/PostManager.js";
 
-const PostList = ({ refresh }) => {
+const PostList = ({ refresh, handleRefresh }) => {
   const [posts, setPosts] = useState([]);
   const [value, setValue] = useState("");
 
@@ -12,7 +12,11 @@ const PostList = ({ refresh }) => {
   };
 
   const searchPosts = (q) => {
+    if (q.trim() === ""){
+      getPosts();
+    } else {
     searchAllPosts(q).then(searchedPosts => setPosts(searchedPosts));
+    }
   };
 
   const handleChange = (e) => {
@@ -21,10 +25,13 @@ const PostList = ({ refresh }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (value === "") {
-      getPosts();
-    }
-    searchPosts(value);
+    let newValue = value;
+    searchPosts(newValue);
+    setValue("");
+  }
+
+  const handleClear = () => {
+    window.location.reload();
   }
 
   useEffect(() => {
@@ -46,8 +53,9 @@ const PostList = ({ refresh }) => {
       <input type="submit" value="Submit" />
       </form> */}
       <form onSubmit={handleSubmit}>
-        <input type="text" placeholder="Why this disappear" onChange={handleChange} />
-        <input type="submit" value="Submit" />
+        <input type="text" placeholder="Filter results" value={value} onChange={handleChange} />
+        <input className="btn btn-primary" type="submit" value="Submit" />
+        <button className="btn btn-primary" onClick={handleClear}>Clear</button>
       </form>
       <div className="row justify-content-center">
         <div className="cards-column">
