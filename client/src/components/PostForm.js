@@ -1,17 +1,15 @@
 import React, { useState } from "react";
-import { Card, CardImg, CardBody } from "reactstrap";
-import { Link } from "react-router-dom";
 import { addPost } from "../APIManagers/PostManager";
 
 
-const PostForm = () => {
+const PostForm = ({ handleRefresh }) => {
 
 const [formData, setFormData] = useState({
     Title: "",
     ImageUrl: "",
     Caption: "",
     DateCreated: new Date(),
-    UserProfileId: ""
+    UserProfileId: 1
 });
 
 const handleChange = (e) => {
@@ -22,14 +20,21 @@ const handleChange = (e) => {
 
 const handleSubmit = (event) => {
     event.preventDefault();
-    formData.UserProfileId = 1;
-    addPost(formData);
+    addPost(formData)
+      .then(() => {
+        handleRefresh();
+        setFormData({
+          Title: "",
+          ImageUrl: "",
+          Caption: "",
+          DateCreated: new Date(),
+          UserProfileId: 1
+        })
+      })
 }
 
 
   return (
-    <Card className="m-4">
-      <CardBody>
       <form onSubmit={handleSubmit}>
       <div className="mbsc-form-group">
         <div className="mbsc-form-group-title">Add a mothagiftin gif</div>
@@ -69,8 +74,6 @@ const handleSubmit = (event) => {
         <input type="submit" value="Submit" />
       </div>
       </form>
-      </CardBody>
-    </Card>
   );
 };
 

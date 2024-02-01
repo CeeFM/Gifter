@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { getAllPosts } from "../APIManagers/PostManager.js";
 import { Post } from "./Post";
 
-const PostList = () => {
+const PostList = ({ refresh }) => {
   const [posts, setPosts] = useState([]);
 
   const getPosts = () => {
@@ -12,6 +12,13 @@ const PostList = () => {
   useEffect(() => {
     getPosts();
   }, []); 
+
+  useEffect(() => {
+    getPosts();
+  }, [refresh]); 
+
+
+
   return (
     <div className="container">
       <div className="row justify-content-center">
