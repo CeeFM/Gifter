@@ -17,6 +17,16 @@ export const Post = ({ post }) => {
         </p>
         <p>{post.caption}</p>
         <p>
+          <strong>Comments:</strong>
+          {post.comments && post?.comments?.length > 0 ? (
+            <ul>
+              {post.comments.map((comment) => (
+                <li key={comment.id}>{comment.message}</li>
+              ))}
+            </ul>
+          ) : (
+            <p>No comments yet</p>
+          )}
         </p>
       </CardBody>
     </Card>

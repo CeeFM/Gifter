@@ -3,6 +3,7 @@ import React from "react";
 let postUrl = '/api/post';
 
 export const getAllPosts = () => {
+  postUrl = 'https://localhost:5001/api/post/getwithcomments'
   return fetch(postUrl) 
     .then((res) => res.json())
 };
