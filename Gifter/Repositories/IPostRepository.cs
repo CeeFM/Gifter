@@ -12,6 +12,6 @@ namespace Gifter.Repositories
         List<Post> GetAllWithComments();
 
         List<Post> Search(string criterion, bool sortDescending);
-        List<Post> SearchDate(string since);
+        List<Post> SearchDate(DateTime since);
     }
 }

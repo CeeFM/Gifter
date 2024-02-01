@@ -366,7 +366,7 @@ namespace Gifter.Repositories
                 }
             }
         }
-        public List<Post> SearchDate(string since)
+        public List<Post> SearchDate(DateTime since)
         {
             using (var conn = Connection)
             {
@@ -381,10 +381,10 @@ namespace Gifter.Repositories
                         up.ImageUrl AS UserProfileImageUrl
                     FROM Post p 
                         LEFT JOIN UserProfile up ON p.UserProfileId = up.id
-                    WHERE p.DateCreated >= DATEADD(MINUTE,0,@DateCreated)";
+                    WHERE p.DateCreated >= @DateCreated";
 
                     cmd.CommandText = sql;
-                    DbUtils.AddParameter(cmd, "@DateCreated", DateTime.Parse(since));
+                    DbUtils.AddParameter(cmd, "@DateCreated", since);
                     var reader = cmd.ExecuteReader();
 
                     var posts = new List<Post>();

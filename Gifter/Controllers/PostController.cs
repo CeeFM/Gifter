@@ -72,7 +72,7 @@ namespace Gifter.Controllers
         }
 
         [HttpGet("hottest")]
-        public IActionResult SearchDate(string since)
+        public IActionResult SearchDate(DateTime since)
         {
             return Ok(_postRepository.SearchDate(since));
         }
