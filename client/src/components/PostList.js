@@ -12,7 +12,7 @@ const PostList = ({ refresh, handleRefresh }) => {
   };
 
   const searchPosts = (q) => {
-    if (q.trim() === ""){
+    if (!q){
       getPosts();
     } else {
     searchAllPosts(q).then(searchedPosts => setPosts(searchedPosts));
@@ -26,6 +26,7 @@ const PostList = ({ refresh, handleRefresh }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     let newValue = value;
+    console.log(newValue);
     searchPosts(newValue);
     setValue("");
   }
