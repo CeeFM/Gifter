@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Card, CardImg, CardBody } from "reactstrap";
 import { Link } from "react-router-dom";
+import { getAllUserProfiles, getUserById } from "../APIManagers/PostManager";
 
 
 export const Post = ({ post }) => {
@@ -16,18 +17,20 @@ export const Post = ({ post }) => {
           </Link>
         </p>
         <p>{post.caption}</p>
-        <p>
-          <strong>Comments:</strong>
+        <div>
           {post.comments && post?.comments?.length > 0 ? (
+            <>
+            <strong>Comments:</strong>
             <ul>
               {post.comments.map((comment) => (
-                <li key={comment.id}>{comment.message}</li>
+                <li key={comment.id}> Someone says: {comment.message}</li>
               ))}
             </ul>
+            </>
           ) : (
             <p>No comments yet</p>
           )}
-        </p>
+        </div>
       </CardBody>
     </Card>
   );
