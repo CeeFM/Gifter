@@ -3,19 +3,17 @@ import "./App.css";
 import PostList from "./components/PostList";
 import { BrowserRouter } from 'react-router-dom'
 import PostForm from "./components/PostForm";
+import ApplicationViews from "./components/ApplicationViews";
+import Header from "./components/Header";
 
 function App() {
 
-  const [refresh, setRefresh] = useState(false);
-
-  const handleRefresh = () => {
-    setRefresh(!refresh);
-  };
-
  return(
   <BrowserRouter>
-    <PostForm handleRefresh={handleRefresh} />
-    <PostList refresh={refresh} handleRefresh={handleRefresh} />
+  <div className="App">
+      <Header />
+      <ApplicationViews />
+  </div>
   </BrowserRouter>
 );
 }

@@ -4,7 +4,7 @@ import { Post } from "./Post";
 import { searchAllPosts } from "../APIManagers/PostManager.js";
 import { getAllUserProfiles } from "../APIManagers/PostManager.js";
 
-const PostList = ({ refresh, handleRefresh }) => {
+const PostList = () => {
   const [posts, setPosts] = useState([]);
   const [value, setValue] = useState("");
   const [users, setUsers] = useState([]);
@@ -58,20 +58,8 @@ const PostList = ({ refresh, handleRefresh }) => {
     getAllUsers();
   }, []); 
 
-  useEffect(() => {
-    getPosts();
-  }, [refresh]); 
-
-
-
   return (
     <div className="container">
-      {/* <form onSubmit={searchPosts(value)}>
-      <input type="text" 
-      value=""
-      onChange={handleChange} />
-      <input type="submit" value="Submit" />
-      </form> */}
       <form onSubmit={handleSubmit}>
         <input type="text" placeholder="Filter results" value={value} onChange={handleChange} />
         <input className="btn btn-primary" type="submit" value="Submit" />

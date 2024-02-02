@@ -1,79 +1,78 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import {
+  Form,
+  FormGroup,
+  Card,
+  CardBody,
+  Label,
+  Input,
+  Button,
+} from "reactstrap";
 import { addPost } from "../APIManagers/PostManager";
+import { useNavigate } from "react-router-dom";
 
+export const PostForm = () => {
+  const [userProfileId, setUserProfileId] = useState("");
+  const [imageUrl, setImageUrl] = useState("");
+  const [title, setTitle] = useState("");
+  const [caption, setCaption] = useState("");
 
-const PostForm = ({ handleRefresh }) => {
+  // Use this hook to allow us to programatically redirect users
+  const navigate = useNavigate();
 
-const [formData, setFormData] = useState({
-    Title: "",
-    ImageUrl: "",
-    Caption: "",
-    DateCreated: new Date(),
-    UserProfileId: 1
-});
+  const submit = (e) => {
+    const post = {
+      imageUrl,
+      title,
+      caption,
+      userProfileId: +userProfileId,
+    };
 
-const handleChange = (e) => {
-    const name = e.target.name;
-    const value = e.target.value;
-    setFormData(prevState => ({ ...prevState, [name]: value}));
-};
-
-const handleSubmit = (event) => {
-    event.preventDefault();
-    addPost(formData)
-      .then(() => {
-        handleRefresh();
-        setFormData({
-          Title: "",
-          ImageUrl: "",
-          Caption: "",
-          DateCreated: new Date(),
-          UserProfileId: 1
-        })
-      })
-}
-
+    addPost(post).then((p) => {
+      // Navigate the user back to the home route
+      navigate("/");
+    });
+  };
 
   return (
-      <form onSubmit={handleSubmit}>
-      <div className="mbsc-form-group">
-        <div className="mbsc-form-group-title">Add a mothagiftin gif</div>
-        <label>
-            Post Title:
-        <br />
-        <input 
-            type="text"
-            name="Title"
-            value={formData.Title}
-            onChange={handleChange}
-            placeholder="Enter a title for your post" />
-        </label>
-        <br />
-        <label>
-           Image URL:
-        <br />
-        <input 
-            type="text"
-            name="ImageUrl"
-            value={formData.ImageUrl}
-            onChange={handleChange}
-            placeholder="Enter the Image's URL" />
-        </label>
-        <br />
-        <label>
-           Caption:
-        <br />
-        <input 
-            type="text"
-            name="Caption"
-            value={formData.Caption}
-            onChange={handleChange}
-            placeholder="Enter a caption for your post" />
-        </label>
-        <br />
-        <input type="submit" value="Submit" />
+    <div className="container pt-4">
+      <div className="row justify-content-center">
+        <Card className="col-sm-12 col-lg-6">
+          <CardBody>
+            <Form>
+              <FormGroup>
+                <Label for="userId">User Id (For Now...)</Label>
+                <Input
+                  id="userId"
+                  onChange={(e) => setUserProfileId(e.target.value)}
+                />
+              </FormGroup>
+              <FormGroup>
+                <Label for="imageUrl">Gif URL</Label>
+                <Input
+                  id="imageUrl"
+                  onChange={(e) => setImageUrl(e.target.value)}
+                />
+              </FormGroup>
+              <FormGroup>
+                <Label for="title">Title</Label>
+                <Input id="title" onChange={(e) => setTitle(e.target.value)} />
+              </FormGroup>
+              <FormGroup>
+                <Label for="caption">Caption</Label>
+                <Input
+                  id="caption"
+                  onChange={(e) => setCaption(e.target.value)}
+                />
+              </FormGroup>
+            </Form>
+            <Button color="info" onClick={submit}>
+              SUBMIT
+            </Button>
+          </CardBody>
+        </Card>
       </div>
-      </form>
+    </div>
   );
 };
 
