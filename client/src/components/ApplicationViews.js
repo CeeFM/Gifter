@@ -3,6 +3,8 @@ import PostList from "./PostList";
 import PostForm from "./PostForm";
 import PostDetails from "./PostDetails";
 import { useState } from "react";
+import { UserPost } from "./UserPosts";
+import Post from "./Post";
 
 const ApplicationViews = () => {
 
@@ -13,9 +15,9 @@ return (
         
         <Route path="/posts/add" element={<PostForm />} />
         
-        <Route path="/posts/:id" element={<p>Whoops, nothing here...</p>} />
-                
-        <Route path="*" element={<p>Whoops, nothing here...</p>} />
+        <Route path="/posts/:id" element={<PostDetails />} />
+
+        <Route path="/users/:id" element={<UserPost />} />
      
      </Routes>
     

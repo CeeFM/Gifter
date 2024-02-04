@@ -40,6 +40,9 @@ const PostList = () => {
 
   const handleChange = (e) => {
     setValue(e.target.value);
+    let newValue = value;
+    console.log(newValue);
+    searchPosts(newValue);
   };
 
   const handleSubmit = (event) => {

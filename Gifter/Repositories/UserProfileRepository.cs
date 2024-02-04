@@ -103,17 +103,23 @@ namespace Gifter.Repositories
 
                     UserProfile userprofile = null;
 
-                    if (reader.Read())
+                    while (reader.Read())
                     {
-                        userprofile = new UserProfile()
+                        var userProfileId = DbUtils.GetInt(reader, "PostUserProfileId");
+
+                        if (userprofile == null)
                         {
-                            Id = DbUtils.GetInt(reader, "UserProfileId"),
-                            Name = DbUtils.GetString(reader, "Name"),
-                            Email = DbUtils.GetString(reader, "Email"),
-                            DateCreated = DbUtils.GetDateTime(reader, "UserProfileDateCreated"),
-                            ImageUrl = DbUtils.GetString(reader, "UserProfileImageUrl"),
-                            Posts = new List<Post>()
-                        };
+
+                            userprofile = new UserProfile()
+                            {
+                                Id = DbUtils.GetInt(reader, "UserProfileId"),
+                                Name = DbUtils.GetString(reader, "Name"),
+                                Email = DbUtils.GetString(reader, "Email"),
+                                DateCreated = DbUtils.GetDateTime(reader, "UserProfileDateCreated"),
+                                ImageUrl = DbUtils.GetString(reader, "UserProfileImageUrl"),
+                                Posts = new List<Post>()
+                            };
+                        }
 
                         if (DbUtils.IsNotDbNull(reader, "PostId"))
                         {
@@ -123,25 +129,14 @@ namespace Gifter.Repositories
                                 Title = DbUtils.GetString(reader, "Title"),
                                 Caption = DbUtils.GetString(reader, "Caption"),
                                 UserProfileId = DbUtils.GetInt(reader, "PostUserProfileId"),
-                                DateCreated = DbUtils.GetDateTime(reader, "PostDateCreated")
+                                DateCreated = DbUtils.GetDateTime(reader, "PostDateCreated"),
+                                ImageUrl = DbUtils.GetString(reader,"PostImageUrl"),
+                                Comments = new List<Comment>()
                             });
 
                         }
-                        if (DbUtils.IsNotDbNull(reader, "CommentId"))
-                        {
-                            userprofile.Posts.Add(new Post()
-                            {
-                                Id = DbUtils.GetInt(reader, "PostId"),
-                                Title = DbUtils.GetString(reader, "Title"),
-                                Caption = DbUtils.GetString(reader, "Caption"),
-                                UserProfileId = DbUtils.GetInt(reader, "PostUserProfileId"),
-                                DateCreated = DbUtils.GetDateTime(reader, "PostDateCreated")
-                            });
-
-                        }
-
-                        reader.Close();
                     }
+                    reader.Close();
 
                     return userprofile;
                 }

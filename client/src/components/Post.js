@@ -8,7 +8,7 @@ export const Post = ({ post }) => {
 
   return (
     <Card className="m-4">
-      <p className="text-left px-2">Posted by: {post.userProfile.name}</p>
+      <p className="text-left px-2">Posted by: <Link to={`/users/${post.userProfileId}`}>{post?.userProfile?.name}</Link></p>
       <CardImg top src={post.imageUrl} alt={post.title} />
       <CardBody>
         <p>
@@ -23,12 +23,12 @@ export const Post = ({ post }) => {
             <strong>Comments:</strong>
             <ul>
               {post.comments.map((comment) => (
-                <li key={comment.id}> Someone says: {comment.message}</li>
+                <li key={comment.id}> {comment?.userProfile?.name}: {comment.message}</li>
               ))}
             </ul>
             </>
           ) : (
-            <p>No comments yet</p>
+            <p><i>No comments yet</i></p>
           )}
         </div>
       </CardBody>

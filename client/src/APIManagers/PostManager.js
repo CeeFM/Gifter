@@ -39,3 +39,8 @@ export const searchAllPosts = (q) => {
 export const getPost = (id) => {
   return fetch(`/api/post/${id}`).then((res) => res.json());
 };
+
+export const getPostByIdWithComments = (id) => {
+  return fetch(`${postUrl}/${id}`)
+    .then((res) => res.json)
+}
