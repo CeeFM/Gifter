@@ -1,6 +1,7 @@
 ﻿using Gifter.Models;
 using Gifter.Utils;
 using Microsoft.Extensions.Hosting;
+using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace Gifter.Repositories
 {
