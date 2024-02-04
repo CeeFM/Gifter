@@ -3,11 +3,22 @@ import { getAllPosts } from "../APIManagers/PostManager.js";
 import { Post } from "./Post";
 import { searchAllPosts } from "../APIManagers/PostManager.js";
 import { getAllUserProfiles } from "../APIManagers/PostManager.js";
+import { getallbooks, getallmovies } from "../APIManagers/ExternalManager.js";
 
 const PostList = () => {
   const [posts, setPosts] = useState([]);
   const [value, setValue] = useState("");
   const [users, setUsers] = useState([]);
+  const [books, setbooks] = useState([]);
+  const [movies, setmovies] = useState([]);
+
+const getbooks = () => {
+  getallbooks().then(thesebooks => setbooks(thesebooks));
+}
+
+const getmovies = () => {
+  getallmovies().then(thesemovies => setmovies(thesemovies));
+}
 
   const getPosts = () => {
     getAllPosts().then(allPosts => setPosts(allPosts)); 
@@ -59,10 +70,22 @@ const PostList = () => {
   useEffect(() => {
     getPosts();
     getAllUsers();
+    getbooks();
+    getmovies();
   }, []); 
+
+  const printbooks = () => {
+    console.log(books);
+  }
+
+  const printmovies = () => {
+    console.log(movies);
+  }
 
   return (
     <div className="container">
+      <button onClick={printbooks}>Book API test data</button>
+      <button onClick={printmovies}>Movie API test data</button>
       <form onSubmit={handleSubmit}>
         <input type="text" placeholder="Filter results" value={value} onChange={handleChange} />
         <input className="btn btn-primary" type="submit" value="Submit" />
