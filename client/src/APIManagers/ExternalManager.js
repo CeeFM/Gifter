@@ -20,3 +20,10 @@ export const getallmovies = () => {
       return fetch(`https://api.themoviedb.org/3/movie/popular?language=en-US&page=${randomNumber}`, options)
         .then(response => response.json())
   };
+
+  export const getallmusic = () => {
+    var client_id = '147aa376103a479d841ac45c25308c9c';
+    var client_secret = '0de7fcb4aa734e8f97827c0a02889ec9';
+    
+
+  }

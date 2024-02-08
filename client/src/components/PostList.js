@@ -3,7 +3,7 @@ import { getAllPosts } from "../APIManagers/PostManager.js";
 import { Post } from "./Post";
 import { searchAllPosts } from "../APIManagers/PostManager.js";
 import { getAllUserProfiles } from "../APIManagers/PostManager.js";
-import { getallbooks, getallmovies } from "../APIManagers/ExternalManager.js";
+import { getallbooks, getallmovies, getallmusic } from "../APIManagers/ExternalManager.js";
 
 const PostList = () => {
   const [posts, setPosts] = useState([]);
@@ -11,14 +11,19 @@ const PostList = () => {
   const [users, setUsers] = useState([]);
   const [books, setbooks] = useState([]);
   const [movies, setmovies] = useState([]);
+  const [music, setmusic] = useState([]);
 
 const getbooks = () => {
-  getallbooks().then(thesebooks => setbooks(thesebooks));
+  getallbooks().then(thesebooks => setbooks(thesebooks)).then(console.log(books));
 }
 
 const getmovies = () => {
-  getallmovies().then(thesemovies => setmovies(thesemovies));
+  getallmovies().then(thesemovies => setmovies(thesemovies)).then(console.log(movies));
 }
+
+// const getmusic = () => {
+//   getallmusic().then(thismusic => setmusic(thismusic));
+// }
 
   const getPosts = () => {
     getAllPosts().then(allPosts => setPosts(allPosts)); 
@@ -70,22 +75,25 @@ const getmovies = () => {
   useEffect(() => {
     getPosts();
     getAllUsers();
-    getbooks();
-    getmovies();
   }, []); 
 
   const printbooks = () => {
-    console.log(books);
+    getbooks();
   }
 
   const printmovies = () => {
-    console.log(movies);
+    getmovies();
+  }
+
+  const printmusic = () => {
+    getallmusic();
   }
 
   return (
     <div className="container">
       <button onClick={printbooks}>Book API test data</button>
       <button onClick={printmovies}>Movie API test data</button>
+      <button onClick={printmusic}>Music API test data</button>
       <form onSubmit={handleSubmit}>
         <input type="text" placeholder="Filter results" value={value} onChange={handleChange} />
         <input className="btn btn-primary" type="submit" value="Submit" />
